@@ -55,7 +55,9 @@ class HomePage extends StatelessWidget {
                   width: 400,
                   height: myBody * 0.5,
                   color: Colors.blue,
-                  child: ListView.builder(
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
                       itemCount: 100,
                       itemBuilder: (context, index) {
                         return Dismissible(
