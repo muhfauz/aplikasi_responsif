@@ -1,3 +1,4 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  Faker faker = Faker();
   // const HomePage({super.key});
 
   @override
@@ -38,21 +40,28 @@ class HomePage extends StatelessWidget {
           children: [
             Container(
               width: 400,
-              height: 200,
+              height: MediaQueryHeigh * 0.4,
               color: Colors.redAccent,
+              child: Image.network('https://picsum.photos/id/10/200/300'),
             ),
             Container(
               width: 400,
-              height: MediaQueryHeigh * 0.4,
+              height: MediaQueryHeigh * 0.6,
               color: Colors.blue,
               child: ListView.builder(
                   itemCount: 100,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(),
-                      title: Text('Coba'),
-                      subtitle: Text('data'),
-                      trailing: Text('data'),
+                    return Dismissible(
+                      key: Key(index.toString()),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              'https://picsum.photos/id/${index}/200/300'),
+                        ),
+                        title: Text(faker.person.name()),
+                        subtitle: Text(faker.lorem.sentence()),
+                        trailing: Text(faker.internet.userName()),
+                      ),
                     );
                   }),
             )
